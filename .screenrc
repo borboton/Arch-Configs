@@ -37,9 +37,9 @@ bindkey -k k7 hardstatus alwayslastline
 bindkey -k k8 hardstatus alwaysignore
 
 # Screens by default
-screen -t JBOSS-PI41 1 ssh root@JBOSS41-PI
+screen -t 
 screen -t bash 2
-screen -t Traslosmuros 3 ssh borboton@traslosmuros.com.ar -p 1323
+screen -t 
 screen -t root 4 su 
 screen -t Music 5 ncmpc
 split
