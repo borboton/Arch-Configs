@@ -1,0 +1,30 @@
+if (BATCH == 0)
+{
+   () = evalfile("emacs");           % Emacs-like bindings
+   enable_menu_keys ();
+}
+No_Backups = 1;
+DISPLAY_TIME = 0;
+TAB_DEFAULT = 8;
+HIGHLIGHT = 1;
+MAX_HITS = 1000;
+ADD_NEWLINE = 1;
+BLINK = 1;
+Tab_Always_Inserts_Tab = 1;
+set_color_scheme ("black3");
+auto_compression_mode ();
+set_status_line ("   %f (%m,%O)	  Lines: %L  (%l,%c)   ", 1);
+variable Ispell_Program_Name = "ispell -d ispell-es";
+variable Jed_Home_Library = "/home/borboton/jedlib";
+set_jed_library_path (Jed_Home_Library + "," + get_jed_library_path ());
+%%%%%%%%%%%
+%% MODES %%
+%%%%%%%%%%%
+% {{md5}}
+%require( "md5" );
+% {{html}}
+variable HTML_INDENT = 5000;
+variable Html_View_Cmd = "iron";
+% {{Latex from http://www.ctan.org/tex-archive/support/jed/latex4jed/}}
+add_mode_for_extension ("latex", "tex");
+enable_dfa_syntax_for_mode ("LaTeX");
