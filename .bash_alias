@@ -1,6 +1,8 @@
 #!/bin/bash
-alias ..='cd ..'
+#
+alias low='cpufreq-set -f 1600000'
 alias ...='cd ../..'
+alias ..='cd ..'
 alias GetwebSite='wget --wait=20 --limit-rate=20K -r -p -U Mozilla'
 alias borrarCd='wodim -v dev=/dev/cdrw -blank=fast'
 alias cd..='cd ..'
@@ -41,8 +43,9 @@ alias touchoff='synclient TouchpadOff=1'
 alias touchon='synclient TouchpadOff=0'
 alias gitclone="git clone git@github.com:borboton/Arch-Configs.git"
 alias gitstatus="git status"
-alias gitadd="git add"
-alias gitdiff="git diff"
-alias gitcommit="git commit -m \$1"
+alias gitadd="git add "
+alias gitdiff="git diff "
+alias gitcommit="git commit -m "
 alias gitpush="git push"
 alias ddf='df -x devtmpfs -x tmpfs -h | column -t'
+#mount.cifs //<hostname>/<share> <punto_de_montaje> -o user=<username>,password=<password>

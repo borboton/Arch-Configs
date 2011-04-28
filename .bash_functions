@@ -65,23 +65,6 @@ thumbit() {
   esac
 }
 
-# go to google for a definition
-define() {
-  local LNG=$(echo $LANG | cut -d '_' -f 1)
-  local CHARSET=$(echo $LANG | cut -d '.' -f 2)
-  links -dump "http://www.google.com/search?hl=${LNG}&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -C 2 -A 5 -w "*" > /tmp/define
-  if [ ! -s /tmp/define ]; then
-    echo "Sorry, google doesn't know this one..."
-    rm -f /tmp/define
-    return 1
-  else
-    cat /tmp/define | grep -v Search
-    echo ""
-  fi
-  rm -f /tmp/define
-  return 0
-}
-
 # grep by paragraph
 grepp() {
   [ $# -ne 2 ] && return 1
@@ -179,6 +162,14 @@ function mp4tomp3() {
     	ffmpeg -i $n -vn -ar 44100 -ac 2 -ab 192000 -f mp3 $n.mp3 ;
 	done 	
 }
+function up() {
+	if [ -z "$1" ] ; then 
+	echo "Debe especificar la ruta" 
+	ompload $1 
+	#icecat `grep http /tmp/upload | cut -d " " -f 4 | sed s/v/i/g`
+	fi 	
+}
+geoip() { links -dump "http://www.geoiptool.com/en/?IP=$1" | sed -n '/Host Name/,/Postal code/p' ; }
 
 
 
