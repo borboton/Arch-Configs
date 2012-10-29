@@ -49,3 +49,22 @@ alias gitcommit="git commit -m "
 alias gitpush="git push"
 alias ddf='df -x devtmpfs -x tmpfs -h | column -t'
 #mount.cifs //<hostname>/<share> <punto_de_montaje> -o user=<username>,password=<password>
+
+
+
+#!/bin/bash
+#
+LLAVES=llaves
+USER=root
+MENSAJE=mensaje
+
+        for i in `cat servers`; do
+                        echo "$i se esta ingresando " > $MENSAJE
+                        ssh -i id_priv_$i -l $USER $i df -h >> $MENSAJE
+                        ssh -i id_priv_$i -l $USER $i ls -l /svpn/ >> $MENSAJE
+                        echo $i >> $MENSAJE
+
+        done
+
+exit
+
