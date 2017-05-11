@@ -1,3 +1,6 @@
+unset SSH_ASKPASS
+git push https://borboton@github.com/borboton/Arch-Configs.git 
+
 CREATE
 
 Clone an existing repository
