@@ -1,7 +1,4 @@
-Log  Server Y notificaciones.  Bloqueo DB z304300 
-
-
-vim +/ServerName /etc/httpd/conf.d/ssl.conf 
+README UPDATE V1
 
 DLNX0092 (10.11.34.185) is alive en blanco. 
 DLNX0093 (10.11.34.186) is alive en blanco. 
@@ -9,39 +6,12 @@ DLNX0094 (10.11.34.187) is alive pass incorrecto.
 PLNX0164 (10.73.100.143) is alive pass incorrecto. 
 
 
+-----------------------------------------------------------------------------------------
 
-DLNX0092 (10.11.34.185)  FALTO  hacer 
 
 find . -name "php.ini"  -type f | xargs -I {} grep "no-debug-non-zts" {}
-
-modificar el php.ini  no funciona el mod ldap. 
-
-
-
-DLNX0093 (10.11.34.186) [root@dlnx0093 httpd]# tail -100 error_log
-[Sun Nov 04 04:02:02 2012] [notice] Digest: generating secret for digest authentication ...
-[Sun Nov 04 04:02:02 2012] [notice] Digest: done
-PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20100525/oci8.so' - /usr/local/lib/php/extensions/no-debug-non-zts-20100525/oci8.so: cannot open shared object file: No such file or directory in Unknown on line 0
-
-
-
-DLNX0094 (10.11.34.187) [root@dlnx0094 httpd]# tail -100 ssl_error_log
-[Sun Nov 04 04:02:03 2012] [warn] RSA server certificate CommonName (CN) `10.11.34.187' does NOT match server name!? 
-
-find . -name "ssl.conf" |xargs -I {} grep ServerName {}  \;
-ssl.conf ip correcto. aparentemente no esta bien la ip de el certificado 
 php -m ldap y oci8 cargados. 
-
-PLNX0164 (10.73.100.143) 
-
+/usr/bin/pfiles 26112
 
 -----------------------------------------------------------------------------------------
 
-PSUN0600
-
-ls -rtl /svpn/log/
-tail /svpn/log/icmp/icmp_srv_3.06-11-2012.log
-cat -v /svpn/conf/icmp_GATEWAY_3.ini
-dos2unix /svpn/conf/icmp_GATEWAY_3.ini 
-ps -ef | grep jar 
-/usr/bin/pfiles 26112
