@@ -3,7 +3,9 @@ Some basic Git commands are:
 ```
 # Git
 alias g='git'
+```
 
+```
 # Branch (b)
 alias gb='git branch'
 alias gbc='git checkout -b'
