@@ -1,18 +1,204 @@
-" All system-wide defaults are set in $VIMRUNTIME/archlinux.vim (usually just
-" /usr/share/vim/vimfiles/archlinux.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vimrc), since archlinux.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing archlinux.vim since it alters the value of the
-" 'compatible' option.
+set runtimepath=~/.vim,$VIMRUNTIME,~/.vim/after
 
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages.
-runtime! archlinux.vim
+" enable clipboard and other Win32 features
+source $VIMRUNTIME/mswin.vim
 
-" If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
-" Or better yet, read /usr/share/vim/vim72/vimrc_example.vim or the vim manual
-" and configure vim to your own liking!
-syntax on
-filetype plugin on
-set nocp                 
+" Use pathogen.vim to manage and load plugins
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+"
+" appearance options
+"
+set bg=dark
+let g:zenburn_high_Contrast = 1
+let g:liquidcarbon_high_contrast = 1
+let g:molokai_original = 1
+
+let g:airline_left_sep='['
+let g:airline_right_sep=']'
+let g:airline_linecolumn_prefix = '§'
+let g:airline_paste_symbol = 'Þ'
+let g:airline_theme='badwolf'
+let g:airline_powerline_fonts=0
+let g:airline_enable_fugitive=0
+let g:airline_enable_syntastic=0
+
+
+set t_Co=256
+colorscheme molokai
+
+if has("gui_running")
+   " set default size: 90x35
+   set columns=90
+   set lines=35
+   " No menus and no toolbar
+   set guioptions-=m
+   set guioptions-=T
+endif
+
+set modeline
+set tabstop=2 " tab size = 2
+set shiftwidth=2 " soft space = 2
+set smarttab
+set expandtab " expand tabs
+set wildchar=9 " tab as completion character
+
+set virtualedit=block
+set clipboard+=unnamed  " Yanks go on clipboard instead.
+set showmatch " Show matching braces.
+
+" Line wrapping on by default
+set wrap
+" set linebreak
+
+
+set history=50 " keep track of last commands
+set number ruler " show line numbers
+set incsearch " incremental searching on
+set hlsearch " highlight all matches
+set smartcase
+set cursorline
+set selectmode=key
+" set showtabline=2 " show always for console version
+set laststatus=2 " Always show the statusline
+" set tabline=%!MyTabLine()
+set wildmenu " menu on statusbar for command autocomplete
+" default to UTF-8 encoding
+set encoding=utf8
+set fileencoding=utf8
+" enable visible whitespace
+" set listchars=tab:»·,trail:·,precedes:<,extends:>
+" set list
+
+" no beep
+autocmd VimEnter * set vb t_vb= 
+
+" tab navigation like firefox
+nmap <C-S-tab> :tabprevious<cr>
+nmap <C-tab> :tabnext<cr>
+map <C-S-tab> :tabprevious<cr>
+map <C-tab> :tabnext<cr>
+imap <C-S-tab> <ESC>:tabprevious<cr>i
+imap <C-tab> <ESC>:tabnext<cr>i
+nmap <C-t> :tabnew<cr>
+imap <C-t> <ESC>:tabnew<cr> 
+" map \tx for the console version as well
+if !has("gui_running")
+   nmap <Leader>tn :tabnext<cr>
+   nmap <Leader>tp :tabprevious<cr>
+   nmap <Leader><F4> :tabclose<cr>
+end
+
+" Map Ctrl-E Ctrl-W to toggle linewrap option like in VS
+noremap <C-E><C-W> :set wrap!<CR>
+" Map Ctrl-M Ctrl-L to expand all folds like in VS
+noremap <C-M><C-L> :%foldopen!<CR>
+" Remap omni-complete to avoid having to type so fast
+inoremap <C-Space> <C-X><C-O>
+
+" Windows like movements for long lines with wrap enabled:
+noremap j gj
+noremap k gk
+
+" disable warnings from NERDCommenter:
+let g:NERDShutUp = 1
+
+" Make sure taglist doesn't change the window size
+let g:Tlist_Inc_Winwidth = 0
+nnoremap <silent> <F8> :TlistToggle<CR>
+
+" language specific customizations:
+let g:python_highlight_numbers = 1
+
+" set custom file types I've configured
+au BufNewFile,BufRead *.ps1  setf ps1
+au BufNewFile,BufRead *.boo  setf boo
+au BufNewFile,BufRead *.config  setf xml
+au BufNewFile,BufRead *.xaml  setf xml
+au BufNewFile,BufRead *.xoml  setf xml
+au BufNewFile,BufRead *.blogTemplate  setf xhtml
+au BufNewFile,BufRead *.brail  setf xhtml
+au BufNewFile,BufRead *.rst  setf xml
+au BufNewFile,BufRead *.rsb  setf xml
+au BufNewFile,BufRead *.io  setf io
+au BufNewFile,BufRead *.notes setf notes
+au BufNewFile,BufRead *.mg setf mg
+
+syntax on " syntax hilight on
+syntax sync fromstart 
+filetype plugin indent on
+
+runtime xmlpretty.vim
+command! -range=% Xmlpretty :call XmlPretty(<line1>, <line2>)
+map <C-K><C-F> :Xmlpretty<CR>
+
+"
+" Bind NERD_Tree plugin to a <Ctrl+E,Ctrl+E>
+"
+noremap <C-E><C-E> :NERDTree<CR>
+noremap <C-E><C-C> :NERDTreeClose<CR>
+
+"
+" Configure TOhtml command
+"
+let html_number_lines = 0
+let html_ignore_folding = 1
+let html_use_css = 1
+"let html_no_pre = 0
+let use_xhtml = 1
+
+"
+" Configure Ku
+"
+let g:ku_component_separators='/\\'
+"
+" Configure syntax specific options
+"
+let python_highlight_all = 1
+
+"
+" Enable spellchecking conditionally
+"
+map <Leader>se :setlocal spell spelllang=en_us<CR>
+map <Leader>ss :setlocal spell spelllang=es_es<CR>
+map <Leader>sn :setlocal nospell<CR>
+
+"
+
+" 
+" Configure tabs for the console version
+"
+function! MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T'
+
+    " the label is made by MyTabLabel()
+    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s .= '%=%#TabLine#%999Xclose'
+  endif
+
+  return s
+endfunction
+
+function! MyTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  return bufname(buflist[winnr - 1])
+endfunction
