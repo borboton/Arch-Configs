@@ -1,3 +1,31 @@
+Section 7.1: Return to a previous commit
+To jump back to a previous commit, first find the commit's hash using git log.
+To temporarily jump back to that commit, detach your head with:
+```git checkout 789abcd
+This places you at commit 789abcd. You can now make new commits on top of this old commit without affecting the
+branch your head is on. Any changes can be made into a proper branch using either branch or checkout -b.
+To roll back to a previous commit while keeping the changes:
+```git reset --soft 789abcd
+To roll back the last commit:
+```git reset --soft HEAD~
+To permanently discard any changes made after a specific commit, use:
+```git reset --hard 789abcd
+To permanently discard any changes made after the last commit:
+```git reset --hard HEAD~
+Beware: While you can recover the discarded commits using reflog and reset, uncommitted changes cannot be
+recovered. Use git stash; git reset instead of git reset --hard to be safe.
+Section 7.2: Undoing changes
+Undo changes to a file or directory in the working copy.
+```git checkout -- file.txt
+Used over all file paths, recursively from the current directory, it will undo all changes in the working copy.
+```git checkout -- .
+To only undo parts of the changes use --patch. You will be asked, for each change, if it should be undone or not.
+```git checkout --patch -- dir
+To undo changes added to the index.
+```git reset --hard
+Without the --hard flag this will do a soft reset.
+With local commits that you have yet to push to a remote you can also do a soft reset. You can thus rework the files
+
 unset SSH_ASKPASS
 git push https://borboton@github.com/borboton/Arch-Configs.git 
 
